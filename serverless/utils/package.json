@@ -1,0 +1,26 @@
+{
+  "name": "@krishnavcloudify99/utils",
+  "version": "1.0.12",
+  "description": "",
+  "main": "./lib/index.js",
+  "publishConfig": {
+    "@krishnavcloudify99:registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/krishnavcloudify99/pm-apps-test.git"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "files": [
+    "lib/**/*"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "gitHead": "bf75e420a0fea7e51d19136c4ca2115c151aa4d1"
+}
