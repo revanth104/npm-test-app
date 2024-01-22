@@ -2,10 +2,10 @@
   "name": "pm-apps-test",
   "version": "1.0.0",
   "publishConfig": {
-    "@krishnavcloudify99:registry": "https://npm.pkg.github.com"
+    "@revanth104:registry": "https://npm.pkg.github.com"
   },
   "repository": {
-    "url": "https://github.com/krishnavcloudify99/pm-apps-test.git"
+    "url": "https://github.com/revanth104/npm-test-app.git"
   },
   "description": "",
   "keywords": [],
