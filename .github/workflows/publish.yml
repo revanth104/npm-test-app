@@ -25,7 +25,7 @@ jobs:
       - name: Check publish version
         id: check
         run: |
-          PACKAGE_VERSIONS=$(curl -L  -H "Accept: application/vnd.github+json"  -H "Authorization: Bearer ${{ env.PAT_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28"  https://api.github.com/revanth104/packages/npm/npm-test-app/versions?state=active)
+          PACKAGE_VERSIONS=$(curl -L  -H "Accept: application/vnd.github+json"  -H "Authorization: Bearer ${{ env.PAT_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28"  https://api.github.com/user/packages/npm/pm-apps-test/versions?state=active)
           echo "Github packages"
           echo "$PACKAGE_VERSIONS"
           RECENT_PUBLISHED_VERSION=$(echo $PACKAGE_VERSIONS | jq -r '.[0].name')
