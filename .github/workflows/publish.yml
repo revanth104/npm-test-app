@@ -1,4 +1,4 @@
-name: "publish npm"
+name: "Publish npm and GitHub Packages"
 
 on:
   push:
@@ -21,7 +21,36 @@ jobs:
       - name: Change to serverless/apps directory
         run: cd serverless/apps
 
-      - name: Publish
+      - name: Publish to npm
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Publish to GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+          echo "@revanth104:registry=https://npm.pkg.github.com" >> .npmrc
+          npm publish --registry=https://npm.pkg.github.com/your-username
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Release Notes
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          body: |
+            Add your release notes here.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: path/to/your/package
+          asset_name: your-package-name
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
