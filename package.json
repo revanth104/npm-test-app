@@ -1,6 +1,6 @@
 {
   "name": "pm-apps-test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "@revanth104:registry": "https://npm.pkg.github.com"
   },
