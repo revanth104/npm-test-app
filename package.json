@@ -16,5 +16,5 @@
     "lerna": "^8.0.1",
     "verdaccio": "^5.29.0"
   },
-  "private": true
+  "private": false
 }
