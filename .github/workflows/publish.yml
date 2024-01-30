@@ -41,6 +41,8 @@ jobs:
           fi
 
   publish-gpr:
+    needs: check-if-published
+    if: ${{ needs.check-if-published.outputs.NOT_PUBLISHED == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
