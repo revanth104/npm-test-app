@@ -1,6 +1,6 @@
 {
   "name": "@revanth104/pm-apps-test",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -15,6 +15,9 @@
     "@changesets/cli": "^2.27.1",
     "lerna": "^8.0.1",
     "verdaccio": "^5.29.0"
+  },
+  "bin": {
+    "pmapps": "./local/pm-app-cli/dist/index.js"
   },
   "private": false
 }
