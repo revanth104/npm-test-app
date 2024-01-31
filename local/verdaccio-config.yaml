@@ -70,14 +70,14 @@ uplinks:
 # https://verdaccio.org/docs/protect-your-dependencies/
 # https://verdaccio.org/docs/configuration#packages
 packages:
-  '@krish/*':
+  "@krish/*":
     # scoped packages
     access: $all
     publish: $anonymous
     unpublish: $anonymous
     proxy: npmjs
 
-  '**':
+  "**":
     # allow all users (including non-authenticated users) to read and
     # publish all packages
     #
@@ -87,7 +87,7 @@ packages:
 
     # allow all known users to publish/publish packages
     # (anyone can register by default, remember?)
-    publish: $authenticated
+    publish: $all
     unpublish: $authenticated
 
     # if package is not available locally, proxy requests to 'npmjs' registry

@@ -1,38 +1,98 @@
 import inquirer from "inquirer";
 import shell from "shelljs";
+import chalk from "chalk";
+import { exec } from "child_process";
 
+// This is used to check if the verdaccio server is running
+const isVerdaccioRunning = () => {
+  const response = shell.exec("curl -Is http://localhost:4873");
+  return response.stdout.includes("200 OK");
+};
+
+// Start Verdaccio in a separate terminal window
+const startVerdaccio = () => {
+  console.log(chalk.green("-----Running Verdaccio-----"));
+
+  const command = "start cmd.exe";
+  const args = [
+    "/c",
+    "pnpm",
+    "verdaccio",
+    "-c",
+    "./local/verdaccio-config.yaml",
+  ];
+
+  exec(`${command} ${args.join(" ")}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(
+        chalk.red(`Error starting Verdaccio: ${stderr || error.message}`)
+      );
+    }
+  });
+};
+
+// Stops the Verdaccio server by killing the port 4873.
+const stopVerdaccio = () => {
+  console.log(chalk.red("-----Stopping Verdaccio server-----"));
+  shell.exec("npx kill-port 4873");
+  console.log(chalk.green("-----Verdaccio server stopped successfully-----"));
+};
+
+// Deploys package to Verdaccio and deletes existing package folder if it exists.
 const deployToVerdaccio = async () => {
-  shell.exec("pnpm set registry http://localhost:4873/");
-  shell.exec("pnpm publish --registry http://localhost:4873 --no-git-checks");
-};
-
-const unpublishFromVerdaccio = async () => {
+  const verdaccioStoragePath = "./local/storage";
+  const packageFolderPath = `${verdaccioStoragePath}/@krish`;
+  if (shell.test("-e", packageFolderPath)) {
+    console.log(chalk.red("-----Deleting existing package folder-----"));
+    shell.rm("-rf", packageFolderPath);
+  } else {
+    console.log(chalk.yellow("-----Package folder does not exist-----"));
+  }
+  console.log(chalk.cyan("-----Publishing package to Verdaccio-----"));
   shell.exec(
-    "pnpm unpublish --force @krish/hubspot --registry:http://localhost:4873"
+    "pnpm publish -r --registry http://localhost:4873/ --no-git-checks"
   );
-  shell.exec("pnpm set registry https://registry.npmjs.org/");
+  console.log(
+    chalk.green("-----Published package to Verdaccio successfully-----")
+  );
 };
 
+// Asynchronous function to start Verdaccio server and prompt user for actions.
 const main = async () => {
-  console.log("Welcome to pm apps CLI!");
+  if (isVerdaccioRunning()) {
+    console.log(
+      chalk.green("-------Verdaccio server is already running------")
+    );
+  } else {
+    startVerdaccio();
+  }
 
-  const QUESTIONS = [
-    {
+  while (true) {
+    const QUESTIONS = [
+      {
         type: "list",
         name: "action",
         message: "Choose an action",
-        choices: ["Deploy to Verdaccio", "Unpublish from Verdaccio"],
-    }
-  ]
+        choices: [
+          "Publish package to Verdaccio",
+          "Stop Verdaccio server",
+          "Other options",
+        ],
+      },
+    ];
 
-  const {action} = await inquirer.prompt(QUESTIONS);
-  if (action === "Deploy to Verdaccio") {
-    await deployToVerdaccio();
-  } else if (action === "Unpublish from Verdaccio") {
-      await unpublishFromVerdaccio()
-  } else {
-    console.log("Invalid action please choose a valid action");
+    const answers = await inquirer.prompt(QUESTIONS);
+
+    console.log(`User chose: ${answers.action}`);
+    if (answers.action === "Publish package to Verdaccio") {
+      deployToVerdaccio();
+    } else if (answers.action === "Stop Verdaccio server") {
+      stopVerdaccio();
+      break;
+    } else {
+      console.log(chalk.red("------Other options not implemented yet------"));
+    }
   }
 };
 
-main()
+main();
