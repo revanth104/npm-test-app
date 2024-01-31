@@ -18,10 +18,10 @@ jobs:
         run: |
           CHANGES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
           if [ -z "$CHANGES" ]; then
-            echo "No changes detected. Please make changes and try again."
+            echo "No changeset detected. Please create a changeset and try again."
             exit 1
           else
-            echo "Changes detected: $CHANGES"
+            echo "Changeset detected: $CHANGES"
           fi
 
       - name: Set output for changeset
@@ -35,6 +35,6 @@ jobs:
       - name: Fail if no changeset
         run: |
           if [ -z "$CHANGES" ]; then
-            echo "No changes detected. Failing the workflow."
+            echo "No changeset detected. Failing the workflow."
             exit 1
           fi
