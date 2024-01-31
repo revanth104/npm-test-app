@@ -13,12 +13,18 @@
   "license": "ISC",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc && shx -rf dist && shx cp -r src dist"
+    "build": "tsc && shx -rf dist && shx cp -r src/* dist/"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@types/inquirer": "^9.0.7",
+    "@types/shelljs": "^0.8.15",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.13",
     "lerna": "^8.0.1",
+    "shelljs": "^0.8.5",
     "shx": "^0.3.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "verdaccio": "^5.29.0"
   },

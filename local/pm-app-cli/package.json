@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc && shx rm -rf dist && shx cp -r src dist"
+    "build": "tsc && shx cp -r src dist && shx rm -rf dist/index.ts && shx rm -rf dist/src"
   },
   "bin": {
     "pmapps": "./dist/index.js"
