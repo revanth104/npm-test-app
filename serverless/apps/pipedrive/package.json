@@ -1,0 +1,22 @@
+{
+  "name": "@krish/hubspot",
+  "version": "1.1.5",
+  "description": "",
+  "main": "./lib/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -watch"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  },
+  "gitHead": "e6263464542520606356b8088bb1cf0aa691ee50"
+}
