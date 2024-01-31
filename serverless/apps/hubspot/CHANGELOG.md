@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 1.1.1
+
+### Patch Changes
+
+- testing patch versdion
+
 ## 1.1.0
 
 ### Minor Changes
