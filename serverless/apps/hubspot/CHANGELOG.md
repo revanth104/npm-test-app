@@ -1,5 +1,22 @@
 # @krish/hubspot
 
+## 1.1.4
+
+### Patch Changes
+
+- eaacd2a: ## 1.0.3
+
+  ### Patch Changes
+
+  - testingt the changeset
+    feat: test
+
+## 1.1.3
+
+### Patch Changes
+
+- test
+
 ## 1.1.2
 
 ### Patch Changes
