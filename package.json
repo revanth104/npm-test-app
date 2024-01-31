@@ -11,9 +11,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc && shx -rf dist && shx cp -r src dist"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "lerna": "^8.0.1",
+    "shx": "^0.3.4",
+    "typescript": "^5.3.3",
     "verdaccio": "^5.29.0"
   },
   "bin": {

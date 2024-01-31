@@ -1,2 +1,2 @@
 packages:
- - 'serverless/apps/*'
+  - "serverless/apps/*"
