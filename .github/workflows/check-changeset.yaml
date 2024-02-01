@@ -24,4 +24,4 @@ jobs:
           git checkout develop
           git pull origin develop
           CHANGES=$(npx changeset status --since=develop)
-          echo "CHANGES=$CHANGES" >> $GITHUB_OUTPUT
+          echo "CHANGES"
