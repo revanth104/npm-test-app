@@ -23,4 +23,5 @@ jobs:
           git fetch origin develop
           git checkout develop
           git pull origin develop
-          npx changeset status --since=develop
+          CHANGES=$(npx changeset status --since=develop)
+          echo "CHANGES=$CHANGES" >> $GITHUB_ENV
