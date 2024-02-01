@@ -20,8 +20,4 @@ jobs:
 
       - name: Check for Changeset
         run: |
-          git fetch origin ${GITHUB_HEAD_REF}
-          git fetch origin ${GITHUB_BASE_REF}
-          git checkout ${GITHUB_HEAD_REF}
-          npx changeset status --since=origin/${GITHUB_BASE_REF}
-          git checkout ${GITHUB_SHA}
+          npx changeset status --since=${{ github.base_ref }}
