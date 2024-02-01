@@ -21,11 +21,9 @@ jobs:
       - name: Check for Changeset
         run: |
           # Fetch changes from the pull request branch
-          git fetch origin ${{ github.head_ref }}
-          git checkout ${{ github.head_ref }}
-          git pull origin ${{ github.head_ref }}
+          git checkout ${{ github.event.pull_request.head.sha }}
           # Check for changesets in the latest commit of the pull request
-          CHANGES=$(npx changeset status --since=${{ github.sha }})
+          CHANGES=$(npx changeset status --since=origin/main)
 
           if [ -z "$CHANGES" ]; then
             echo "No changesets found in the latest commit of the pull request."
