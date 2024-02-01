@@ -26,4 +26,4 @@ jobs:
           git fetch origin main
           git checkout main
           git pull origin main
-          npx changeset status --since=main
+          npx changeset status --since=develop
