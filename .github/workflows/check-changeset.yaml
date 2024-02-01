@@ -20,7 +20,7 @@ jobs:
 
       - name: Check for Changeset
         run: |
-          git fetch origin develop
-          git checkout develop
-          git pull origin develop
-          npx changeset status --since=develop
+          git fetch origin main
+          git checkout main
+          git pull origin main
+          npx changeset status --since=origin/main
