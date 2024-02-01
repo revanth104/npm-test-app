@@ -22,4 +22,4 @@ jobs:
         run: npm install
 
       - name: Check for Changeset
-        run: npx changeset status --since=main
+        run: npx changeset status --since=develop
