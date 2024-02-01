@@ -23,7 +23,7 @@ jobs:
           # Fetch changes from the pull request branch
           git fetch origin ${{ github.head_ref }}
           git checkout ${{ github.head_ref }}
-
+          git pull origin ${{ github.head_ref }}
           # Check for changesets in the latest commit of the pull request
           CHANGES=$(npx changeset status --since=${{ github.sha }})
 
