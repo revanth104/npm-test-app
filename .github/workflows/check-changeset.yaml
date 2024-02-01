@@ -23,30 +23,5 @@ jobs:
           git fetch origin ${GITHUB_HEAD_REF}
           git fetch origin ${GITHUB_BASE_REF}
           git checkout ${GITHUB_HEAD_REF}
-          CHANGES=$(npx changeset status --since=${{ github.base_ref }})
+          npx changeset status --since=origin/${GITHUB_BASE_REF}
           git checkout ${GITHUB_SHA}
-
-          if [ -z "$CHANGES" ]; then
-            echo "No changesets found in the latest commit of the pull request."
-            echo "::set-output name=changesets::false"
-          else
-            echo "Changesets found. Continuing with the workflow."
-            echo "::set-output name=changesets::true"
-          fi
-
-      - name: Set Changeset Status
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const changesetsFound = process.env.CHANGESETS === 'true';
-            const status = changesetsFound ? 'success' : 'failure';
-            github.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: status,
-              context: 'check-changeset',
-              description: `Changesets found: ${changesetsFound}`,
-            });
-        env:
-          CHANGESETS: ${{ steps.build.outputs.changesets }}
