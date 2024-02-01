@@ -20,14 +20,7 @@ jobs:
 
       - name: Check for Changeset
         run: |
-          # Fetch changes from the pull request branch
-          git checkout ${{ github.event.pull_request.head.sha }}
-          # Check for changesets in the latest commit of the pull request
-          CHANGES=$(npx changeset status --since=origin/main)
-
-          if [ -z "$CHANGES" ]; then
-            echo "No changesets found in the latest commit of the pull request."
-            exit 1  # Fails the workflow
-          else
-            echo "Changesets found. Continuing with the workflow."
-          fi
+          git fetch origin develop
+          git checkout develop
+          git pull origin develop
+          npx changeset status --since=develop
