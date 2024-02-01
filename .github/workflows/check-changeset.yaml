@@ -23,5 +23,4 @@ jobs:
           git fetch origin develop
           git checkout develop
           git pull origin develop
-          CHANGES=$(npx changeset status --since=develop)
-          echo "CHANGES"
+          npx changeset status --since=develop
