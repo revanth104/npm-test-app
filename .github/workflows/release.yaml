@@ -23,7 +23,3 @@ jobs:
 
       - name: Check for Changeset
         run: npx changeset status --since=main
-             if [ $? -eq 1 ]; then
-              echo "Error: No changeset found. This pull request cannot be merged without a changeset."
-              exit 1
-             fi
