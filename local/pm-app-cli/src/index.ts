@@ -61,7 +61,7 @@ const deployToVerdaccio = async () => {
 const main = async () => {
   if (isVerdaccioRunning()) {
     console.log(
-      chalk.green("-------Verdaccio server is already------")
+      chalk.green("-------Verdaccio server is already running------")
     );
   } else {
     startVerdaccio();
