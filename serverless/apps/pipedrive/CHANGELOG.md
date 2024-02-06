@@ -1,5 +1,12 @@
 # @krish/hubspot
 
+## 10.0.0
+
+### Major Changes
+
+- 407ca7e: testing
+- d9d182a: test
+
 ## 9.0.0
 
 ### Major Changes
