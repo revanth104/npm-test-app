@@ -1,9 +1,6 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - main
+on: [pull_request]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -31,7 +28,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - run: pnpm install
-      - name: Create Release Pull Request
-        uses: changesets/action@v1
+      - name: Release Changeset version
+        run: npx changeset version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Commit changes from Changeset versioning"
+          git push origin HEAD:develop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
