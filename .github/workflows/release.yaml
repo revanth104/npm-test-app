@@ -1,6 +1,9 @@
 name: Release
 
-on: [pull_request]
+on:
+  workflow_run:
+    workflows: [Changeset Check]
+    types: [completed]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
