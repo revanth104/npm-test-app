@@ -46,7 +46,7 @@ jobs:
           result="success"
           echo "RESULT=${result}" >> $GITHUB_ENV
 
-  changest-version:
+  changeset-version:
     needs: check-changesets
     runs-on: ubuntu-latest
     if: ${{ needs.check-changesets.outputs.result == 'success' }}
