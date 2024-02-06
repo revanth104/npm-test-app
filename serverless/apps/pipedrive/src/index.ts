@@ -1,3 +1,3 @@
 export default function () {
-    return "Hellow world from pipedrive Module 4456";
+    return "Hellow world from pipedrive Module 44";
 }
