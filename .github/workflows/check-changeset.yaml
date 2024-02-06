@@ -6,7 +6,7 @@ jobs:
   check-changesets:
     runs-on: ubuntu-latest
     outputs:
-      result: ${{ steps.check-changesets.outputs.result }}
+      RESULT: ${{ steps.check-changesets.outputs.RESULT }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -42,52 +42,47 @@ jobs:
       - name: Set workflow result
         id: check-changesets
         run: |
-          # Adjust the logic based on the result of your Changeset Check
-          result="success"
-          echo "RESULT=${result}" >> $GITHUB_ENV
+          echo "RESULT=success" >> $GITHUB_ENV
           echo "Result: $RESULT"
 
   changeset-version:
     needs: check-changesets
     runs-on: ubuntu-latest
-    # if: ${{ needs.check-changesets.outputs.result == 'success' }}
+    if: ${{ needs.check-changesets.outputs.RESULT == 'success' }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Debug Info
+      - name: Enable corepack
+        run: corepack enable
+        shell: bash
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
         run: |
-          echo "Result: ${{ needs.check-changesets.outputs.result }}"
-      # - name: Enable corepack
-      #   run: corepack enable
-      #   shell: bash
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
 
-      # - name: Get pnpm store directory
-      #   id: pnpm-cache
-      #   shell: bash
-      #   run: |
-      #     echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-      # - uses: actions/cache@v3
-      #   name: Setup pnpm cache
-      #   with:
-      #     path: ${{ env.STORE_PATH }}
-      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
 
-      # - run: pnpm install
+      - name: Release Changeset version
+        run: npx changeset version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Release Changeset version
-      #   run: npx changeset version
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Commit changes
-      #   run: |
-      #     git config --local user.email "actions@github.com"
-      #     git config --local user.name "GitHub Actions"
-      #     git add .
-      #     git commit -m "Commit changes from Changeset versioning"
-      #     git push origin HEAD:develop
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Commit changes from Changeset versioning"
+          git push origin HEAD:develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
