@@ -54,7 +54,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Debug Info
-        run: echo "Result: ${{ needs.check-changesets.outputs.result }}"
+        run: |
+          echo "Result: ${{ needs.check-changesets.outputs.result }}"
       # - name: Enable corepack
       #   run: corepack enable
       #   shell: bash
