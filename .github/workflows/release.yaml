@@ -32,3 +32,7 @@ jobs:
         run: npx changeset version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Commit changes from Changeset versioning"
