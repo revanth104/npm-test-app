@@ -16,7 +16,7 @@ jobs:
       RECENT_PUBLISHED_VERSION: ${{ steps.check.outputs.RECENT_PUBLISHED_VERSION }}
       PACKAGE_VERSION: ${{ steps.get-version.outputs.VERSION }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Get version from package.json
         id: get-version
         run: |
@@ -48,7 +48,7 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Enable corepack
         run: corepack enable
         shell: bash
