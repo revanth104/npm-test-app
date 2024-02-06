@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 8.0.0
+
+### Major Changes
+
+- 70618a0: testing
+
 ## 7.0.0
 
 ### Major Changes
