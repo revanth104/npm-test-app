@@ -1,6 +1,9 @@
 name: Changeset Check and Versioning
 
-on: ["pull_request"]
+on:
+  pull_request:
+    paths:
+      - "serverless/**"
 
 jobs:
   check-changesets:
