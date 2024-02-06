@@ -1,5 +1,12 @@
 # @krish/hubspot
 
+## 4.0.0
+
+### Major Changes
+
+- acbaa45: test
+- 04bd22f: test
+
 ## 3.0.0
 
 ### Major Changes
