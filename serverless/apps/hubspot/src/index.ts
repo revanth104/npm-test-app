@@ -1,3 +1,3 @@
 export default function () {
-    return "Hellow world from hubspot Module 7rr ";
+    return "Hellow world from hubspot Module 7";
 }
