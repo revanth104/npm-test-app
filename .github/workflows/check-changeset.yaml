@@ -1,4 +1,4 @@
-name: Changeset Check
+name: Changeset Check and Versioning
 
 on: ["pull_request"]
 
