@@ -1,11 +1,12 @@
 name: Changeset Check
 
-on: [pull_request]
+on: ["pull_request"]
 
 jobs:
-  build:
+  check-changesets:
     runs-on: ubuntu-latest
-
+    outputs:
+      result: ${{ steps.check-changesets.outputs.result }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -33,3 +34,47 @@ jobs:
           git checkout ${GITHUB_HEAD_REF}
           npx changeset status --since=origin/${GITHUB_BASE_REF}
           git checkout ${GITHUB_SHA}
+      - name: Set workflow result
+        id: check-changesets
+        run: |
+          # Adjust the logic based on the result of your Changeset Check
+          result="success"
+          echo "::set-output name=result::${result}"
+
+  changest-version:
+    needs: check-changesets
+    runs-on: ubuntu-latest
+    if: ${{ needs.check-changesets.outputs.result == 'success' }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Enable corepack
+        run: corepack enable
+        shell: bash
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - run: pnpm install
+      - name: Release Changeset version
+        run: npx changeset version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Commit changes from Changeset versioning"
+          git push origin HEAD:develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
