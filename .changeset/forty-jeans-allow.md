@@ -1,5 +1,0 @@
----
-"@krish/pipedrive": major
----
-
-testing
