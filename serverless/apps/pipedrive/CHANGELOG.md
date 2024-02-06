@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 9.0.0
+
+### Major Changes
+
+- 93969de: test
+
 ## 8.0.0
 
 ### Major Changes

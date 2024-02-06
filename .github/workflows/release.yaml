@@ -1,12 +1,15 @@
 name: Release
 
-on: [pull_request]
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+on:
+  workflow_run:
+    workflows: ["Changeset Check"]
+    types:
+      - completed
 
 jobs:
   release:
     name: Release
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
