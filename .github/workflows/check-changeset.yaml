@@ -42,7 +42,7 @@ jobs:
       - name: Set workflow result
         id: check-changesets
         run: |
-          echo "RESULT=success" >> $GITHUB_ENV
+          echo "RESULT=success" >> $GITHUB_OUTPUT
           echo "Result: $RESULT"
 
   changeset-version:
