@@ -1,8 +1,8 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: [Changeset Check]
+  workflow:
+    workflows: ["Changeset Check"]
     types:
       - completed
       - completed_with_conclusions
