@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 7.0.0
+
+### Major Changes
+
+- 0e930ea: tet
+
 ## 6.0.0
 
 ### Major Changes
