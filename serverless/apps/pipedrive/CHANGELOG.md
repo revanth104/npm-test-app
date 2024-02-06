@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 7.0.0
+
+### Major Changes
+
+- 9737846: test
+
 ## 6.0.0
 
 ### Major Changes
