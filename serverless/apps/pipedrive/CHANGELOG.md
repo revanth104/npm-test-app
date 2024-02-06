@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 6.0.0
+
+### Major Changes
+
+- 6fc54fe: test
+
 ## 5.0.0
 
 ### Major Changes
