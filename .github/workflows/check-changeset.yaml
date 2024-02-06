@@ -45,6 +45,7 @@ jobs:
           # Adjust the logic based on the result of your Changeset Check
           result="success"
           echo "RESULT=${result}" >> $GITHUB_ENV
+          echo "Result: $RESULT"
 
   changeset-version:
     needs: check-changesets
