@@ -1,13 +1,10 @@
 name: Release
 
 on:
-  workflow:
+  workflow_run:
     workflows: ["Changeset Check"]
     types:
       - completed
-      - completed_with_conclusions
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
