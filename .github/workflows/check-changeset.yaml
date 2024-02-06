@@ -43,7 +43,7 @@ jobs:
         id: check-changesets
         run: |
           echo "RESULT=success" >> $GITHUB_OUTPUT
-          echo "Result: $RESULT"
+          echo "$RESULT"
 
   changeset-version:
     needs: check-changesets
