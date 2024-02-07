@@ -68,6 +68,6 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ env.NODE_AUTH_TOKEN }}">.npmrc
           echo "@cloudifybiz:registry=https://npm.pkg.github.com">>.npmrc
           pnpm install
-          pnpm -r publish --no-git-checks
+          pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
