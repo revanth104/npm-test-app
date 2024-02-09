@@ -42,5 +42,4 @@ jobs:
           echo git config --global user.email "rr@cloudify.biz"
           echo git config --global user.name "revanth104"
           echo '//localhost:4873/:_authToken="dummy-auth-token"' > .npmrc
-          pnpm build
           pnpm publish -r --registry http://localhost:4873/ --no-git-checks
