@@ -33,16 +33,11 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Start Verdaccio
         run: |
-          pnpm verdaccio -c ./local/verdaccio-config.yaml &
-          disown
-
-      - name: Wait for Verdaccio to be ready
-        run: |
-          while ! curl -s -o /dev/null http://localhost:4873/; do sleep 5; done
+          pnpm add pm2
+          pnpm pm2 start verdaccio -- -c ./local/verdaccio-config.yaml &
 
       - name: Publish to Verdaccio
         run: |
-          echo "//localhost:4873/:_authToken=dummy_auth_token">.npmrc
           pnpm config set registry http://localhost:4873/
-          echo .npmrc
+          echo '//localhost:4873/:_authToken="dummy-auth-token"' > .npmrc
           pnpm publish -r --registry http://localhost:4873/ --no-git-checks
