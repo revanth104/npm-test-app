@@ -29,6 +29,8 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store
+      - name: Set SHAs with nx-set-shas
+        uses: nrwl/nx-set-shas@v3
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Start Verdaccio
