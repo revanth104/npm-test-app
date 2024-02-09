@@ -1,0 +1,98 @@
+{
+	"name": "@krish/hubspot",
+	"versions": {
+		"7.0.0": {
+			"name": "@krish/hubspot",
+			"version": "7.0.0",
+			"description": "",
+			"main": "./lib/index.js",
+			"type": "module",
+			"files": [
+				"lib/**/*"
+			],
+			"keywords": [],
+			"author": "",
+			"license": "ISC",
+			"devDependencies": {
+				"@types/node": "^20.10.6",
+				"typescript": "^5.3.3"
+			},
+			"gitHead": "e6263464542520606356b8088bb1cf0aa691ee50",
+			"scripts": {
+				"build": "tsc",
+				"build:watch": "tsc -watch"
+			},
+			"_id": "@krish/hubspot@7.0.0",
+			"_integrity": "sha512-lIDzlYmfjmD2SOZquN+7wA5p2jN9gDy7ENbUnBM1LsxDA8iVjMlrJyGSCHvz4Kh49f4mJSQkcoyfh72RQeNrkg==",
+			"_resolved": "C:\\Users\\revan\\AppData\\Local\\Temp\\2d8dbbfc60182b428ccddfda1b3a4a5c\\krish-hubspot-7.0.0.tgz",
+			"_from": "file:krish-hubspot-7.0.0.tgz",
+			"_nodeVersion": "18.16.0",
+			"_npmVersion": "8.16.0",
+			"dist": {
+				"integrity": "sha512-lIDzlYmfjmD2SOZquN+7wA5p2jN9gDy7ENbUnBM1LsxDA8iVjMlrJyGSCHvz4Kh49f4mJSQkcoyfh72RQeNrkg==",
+				"shasum": "baf960588510090d043484ced02b3ff2d332e5e2",
+				"tarball": "http://localhost:4873/@krish/hubspot/-/@krish/hubspot-7.0.0.tgz"
+			},
+			"contributors": []
+		},
+		"58.0.0": {
+			"name": "@krish/hubspot",
+			"version": "58.0.0",
+			"description": "",
+			"main": "./lib/index.js",
+			"type": "module",
+			"files": [
+				"lib/**/*"
+			],
+			"keywords": [],
+			"author": "",
+			"license": "ISC",
+			"devDependencies": {
+				"@types/node": "^20.10.6",
+				"typescript": "^5.3.3"
+			},
+			"gitHead": "e6263464542520606356b8088bb1cf0aa691ee50",
+			"scripts": {
+				"build": "tsc",
+				"build:watch": "tsc -watch"
+			},
+			"_id": "@krish/hubspot@58.0.0",
+			"_integrity": "sha512-Kjf54o13/3kW+ogXkE6l1uTr3OswvX0RUZwv23cFDqellzjOTpdwuYZ1VGMcRItCA2Jpy3mv1eqaxsk5hqHkwQ==",
+			"_resolved": "C:\\Users\\revan\\AppData\\Local\\Temp\\5e9ab5b2488ad64bd92c089c53ac8d99\\krish-hubspot-58.0.0.tgz",
+			"_from": "file:krish-hubspot-58.0.0.tgz",
+			"_nodeVersion": "18.16.0",
+			"_npmVersion": "8.16.0",
+			"dist": {
+				"integrity": "sha512-Kjf54o13/3kW+ogXkE6l1uTr3OswvX0RUZwv23cFDqellzjOTpdwuYZ1VGMcRItCA2Jpy3mv1eqaxsk5hqHkwQ==",
+				"shasum": "1ffdb03aa7a34cca2d4c3610709cfd4c9f7e4ae5",
+				"tarball": "http://localhost:4873/@krish/hubspot/-/@krish/hubspot-58.0.0.tgz"
+			},
+			"contributors": []
+		}
+	},
+	"time": {
+		"modified": "2024-02-09T09:48:43.092Z",
+		"created": "2024-02-09T09:42:17.779Z",
+		"7.0.0": "2024-02-09T09:42:17.779Z",
+		"58.0.0": "2024-02-09T09:48:43.092Z"
+	},
+	"users": {},
+	"dist-tags": {
+		"latest": "58.0.0"
+	},
+	"_uplinks": {},
+	"_distfiles": {},
+	"_attachments": {
+		"hubspot-7.0.0.tgz": {
+			"shasum": "baf960588510090d043484ced02b3ff2d332e5e2",
+			"version": "7.0.0"
+		},
+		"hubspot-58.0.0.tgz": {
+			"shasum": "1ffdb03aa7a34cca2d4c3610709cfd4c9f7e4ae5",
+			"version": "58.0.0"
+		}
+	},
+	"_rev": "6-983d752d73cd0286",
+	"_id": "@krish/hubspot",
+	"readme": "ERROR: No README data found!"
+}

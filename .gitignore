@@ -3,4 +3,3 @@ lib
 dist
 .nx
 .npmrc
-local/storage

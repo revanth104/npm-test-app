@@ -1,0 +1,59 @@
+{
+	"name": "@krish/pipedrive",
+	"versions": {
+		"12.0.0": {
+			"name": "@krish/pipedrive",
+			"version": "12.0.0",
+			"description": "",
+			"main": "./lib/index.js",
+			"type": "module",
+			"files": [
+				"lib/**/*"
+			],
+			"keywords": [],
+			"author": "",
+			"license": "ISC",
+			"devDependencies": {
+				"@types/node": "^20.10.6",
+				"typescript": "^5.3.3"
+			},
+			"gitHead": "e6263464542520606356b8088bb1cf0aa691ee50",
+			"scripts": {
+				"build": "tsc",
+				"build:watch": "tsc -watch"
+			},
+			"_id": "@krish/pipedrive@12.0.0",
+			"_integrity": "sha512-cSap+1V08oUx2FQbayX47O21xSKJpVOaP2eSThyXwag3yEr9IjMo3REYhxuEkKBZKa2KEpqeC8obCLcC4XACOg==",
+			"_resolved": "C:\\Users\\revan\\AppData\\Local\\Temp\\4fc1089341c0783715c8491448c83956\\krish-pipedrive-12.0.0.tgz",
+			"_from": "file:krish-pipedrive-12.0.0.tgz",
+			"_nodeVersion": "18.16.0",
+			"_npmVersion": "8.16.0",
+			"dist": {
+				"integrity": "sha512-cSap+1V08oUx2FQbayX47O21xSKJpVOaP2eSThyXwag3yEr9IjMo3REYhxuEkKBZKa2KEpqeC8obCLcC4XACOg==",
+				"shasum": "2910849f4c12c7bf1a526854c482615b1431170d",
+				"tarball": "http://localhost:4873/@krish/pipedrive/-/@krish/pipedrive-12.0.0.tgz"
+			},
+			"contributors": []
+		}
+	},
+	"time": {
+		"modified": "2024-02-09T09:42:14.569Z",
+		"created": "2024-02-09T09:42:14.569Z",
+		"12.0.0": "2024-02-09T09:42:14.569Z"
+	},
+	"users": {},
+	"dist-tags": {
+		"latest": "12.0.0"
+	},
+	"_uplinks": {},
+	"_distfiles": {},
+	"_attachments": {
+		"pipedrive-12.0.0.tgz": {
+			"shasum": "2910849f4c12c7bf1a526854c482615b1431170d",
+			"version": "12.0.0"
+		}
+	},
+	"_rev": "3-5c649f5c7a5bb94d",
+	"_id": "@krish/pipedrive",
+	"readme": "ERROR: No README data found!"
+}
