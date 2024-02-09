@@ -2,7 +2,7 @@
   "name": "@revanth104/pm-apps-test",
   "version": "1.0.16",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "@revanth104:registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "url": "https://github.com/revanth104/npm-test-app.git"
