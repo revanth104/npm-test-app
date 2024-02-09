@@ -17,4 +17,5 @@ jobs:
           start cmd.exe /c pnpm verdaccio -c ./local/verdaccio-config.yaml
 
       - name: Publish
-        echo: Publishing to Verdaccio
+        run: |
+          echo Publishing to Verdaccio
