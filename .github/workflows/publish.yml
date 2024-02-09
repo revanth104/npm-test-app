@@ -33,7 +33,13 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Start Verdaccio
         run: |
-          pnpm verdaccio -c ./local/verdaccio-config.yaml
+          pnpm verdaccio -c ./local/verdaccio-config.yaml &
+          echo $! > verdaccio-pid
+          disown
+
+      - name: Wait for Verdaccio to be ready
+        run: |
+          while ! curl -s -o /dev/null http://localhost:4873/; do sleep 5; done
 
       - name: Publish to Verdaccio
         run: |
