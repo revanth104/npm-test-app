@@ -45,4 +45,5 @@ jobs:
 
       - name: Publish to Verdaccio
         run: |
+          echo @revanth104:registry=http://localhost:4873>>.npmrc
           pnpm publish --registry http://localhost:4873/ --no-git-checks
