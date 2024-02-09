@@ -42,6 +42,7 @@ jobs:
 
       - name: Publish to Verdaccio
         run: |
-          echo "//localhost:4873/:_authToken=${{ secrets.GITHUB_TOKEN }}">.npmrc
+          echo "//localhost:4873/:_authToken=dummy_auth_token">.npmrc
           pnpm config set registry http://localhost:4873/
+          echo .npmrc
           pnpm publish -r --registry http://localhost:4873/ --no-git-checks
