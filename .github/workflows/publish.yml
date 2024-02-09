@@ -1,73 +1,12 @@
-name: Deploy Package
-
+name: VERDACCIO
 on:
   push:
     branches:
       - main
-
 jobs:
-  check-if-published:
+  publish:
     runs-on: ubuntu-latest
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-    outputs:
-      NOT_PUBLISHED: ${{ steps.is-published.outputs.NOT_PUBLISHED }}
-      RECENT_PUBLISHED_VERSION: ${{ steps.check.outputs.RECENT_PUBLISHED_VERSION }}
-      PACKAGE_VERSION: ${{ steps.get-version.outputs.VERSION }}
     steps:
       - uses: actions/checkout@v4
-      - name: Get version from package.json
-        id: get-version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-      - name: Check publish version
-        id: check
-        run: |
-          PACKAGE_VERSIONS=$(curl -L  -H "Accept: application/vnd.github+json"  -H "Authorization: Bearer ${{ env.PAT_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28"  https://api.github.com/user/packages/npm/pm-apps-test/versions?state=active)
-          echo "Github packages"
-          echo "$PACKAGE_VERSIONS"
-          RECENT_PUBLISHED_VERSION=$(echo $PACKAGE_VERSIONS | jq -r '.[0].name')
-
-          echo "RECENT_PUBLISHED_VERSION=$RECENT_PUBLISHED_VERSION" >> $GITHUB_OUTPUT
-      - name: Is published
-        id: is-published
-        run: |
-          if [ "${{ steps.get-version.outputs.VERSION }}" == "${{ steps.check.outputs.RECENT_PUBLISHED_VERSION }}" ]; then
-            echo "NOT_PUBLISHED=false" >> $GITHUB_OUTPUT
-          else
-            echo "NOT_PUBLISHED=true" >> $GITHUB_OUTPUT
-          fi
-
-  publish-gpr:
-    needs: check-if-published
-    if: ${{ needs.check-if-published.outputs.NOT_PUBLISHED == 'true' }}
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - name: Enable corepack
-        run: corepack enable
-        shell: bash
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-      - run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ env.NODE_AUTH_TOKEN }}">.npmrc
-          echo "@cloudifybiz:registry=https://npm.pkg.github.com">>.npmrc
-          pnpm install
-          pnpm nx affected --target=release
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Publish
+        run: echo "Verdaccio"
