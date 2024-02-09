@@ -1,4 +1,4 @@
-name: Run Verdaccio
+name: Publish to Verdaccio
 
 on:
   push:
@@ -6,16 +6,21 @@ on:
       - main
 
 jobs:
-  run-verdaccio:
+  publish-to-verdaccio:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Verdaccio
+      - name: Start Verdaccio
         run: |
-          start cmd.exe /c pnpm verdaccio -c ./local/verdaccio-config.yaml
+          pnpm verdaccio -c ./local/verdaccio-config.yaml &
+          disown
 
-      - name: Publish
+      - name: Wait for Verdaccio to be ready
         run: |
-          echo Publishing to Verdaccio
+          while ! curl -s -o /dev/null http://localhost:4873/; do sleep 5; done
+
+      - name: Publish to Verdaccio
+        run: |
+          pnpm publish -r --registry http://localhost:4873/ --no-git-checks
