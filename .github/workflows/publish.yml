@@ -43,6 +43,6 @@ jobs:
 
       - name: Publish to Verdaccio
         run: |
-          echo '//localhost:4873/:_authToken="dummy-auth-token"' > .npmrc
+          echo '//localhost:4873/:_authToken="dummy-auth-token"'>.npmrc
           pnpm config set registry http://localhost:4873/
           pnpm publish -r --registry http://localhost:4873/ --no-git-checks
