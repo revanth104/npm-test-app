@@ -33,8 +33,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Start Verdaccio
         run: |
-          pnpm add pm2 -w
-          pnpm pm2 start verdaccio -c ./local/verdaccio-config.yaml
+          pnpm verdaccio -c ./local/verdaccio-config.yaml
 
       - name: Publish to Verdaccio
         run: |
