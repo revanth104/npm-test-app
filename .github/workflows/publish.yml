@@ -31,4 +31,5 @@ jobs:
 
       - run: |
           pnpm install
+          pnpm verdaccio -c ./local/verdaccio-config.yaml
           pnpm publish -r --registry http://localhost:4873/ --no-git-checks
