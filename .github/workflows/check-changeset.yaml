@@ -95,9 +95,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          TARGET_BRANCH=${ GITHUB_BASE_REF }
           git add .
           git commit -m "Commit changes from Changeset versioning"
-          git push origin HEAD:$TARGET_BRANCH
+          git push origin HEAD:${GITHUB_BASE_REF}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
