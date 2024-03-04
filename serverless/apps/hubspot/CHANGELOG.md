@@ -1,5 +1,11 @@
 # @krish/hubspot
 
+## 61.0.0
+
+### Major Changes
+
+- d8a8a70: test
+
 ## 60.0.0
 
 ### Major Changes
