@@ -1,29 +1,32 @@
-name: Changeset Check and Versioning
-
+# Trigger the workflow on pull requests affecting specific paths
 on:
   pull_request:
     paths:
-      - "serverless/**"
+      - "serverless/apps/**"
 
 jobs:
+  # Job to check for changesets in the pull request
   check-changesets:
     runs-on: ubuntu-latest
+    # Define job outputs
     outputs:
       RESULT: ${{ steps.check-changesets.outputs.RESULT }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Enable corepack
         run: corepack enable
         shell: bash
 
+      # Get pnpm store directory and set it in environment variables
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
 
+      # Setup pnpm cache using actions/cache
       - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
@@ -32,23 +35,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # Install project dependencies using pnpm
       - run: pnpm install
 
+      # Check for Changeset status
       - name: Check for Changeset
         run: |
           git fetch origin ${GITHUB_HEAD_REF}
           git fetch origin ${GITHUB_BASE_REF}
           git checkout ${GITHUB_HEAD_REF}
-          npx changeset status --since=origin/${GITHUB_BASE_REF}
+          pnpm changeset status --since=origin/${GITHUB_BASE_REF}
           git checkout ${GITHUB_SHA}
 
+      # Set the workflow result based on the check
       - name: Set workflow result
         id: check-changesets
         run: |
           echo "RESULT=success" >> $GITHUB_OUTPUT
           echo "$RESULT"
 
+  # Job to release the changeset version if changesets are present
   changeset-version:
+    # Define dependencies on the check-changesets job
     needs: check-changesets
     runs-on: ubuntu-latest
     if: ${{ needs.check-changesets.outputs.RESULT == 'success' }}
@@ -59,6 +67,7 @@ jobs:
         run: corepack enable
         shell: bash
 
+      # Get pnpm store directory and set it in environment variables
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
@@ -75,17 +84,20 @@ jobs:
 
       - run: pnpm install
 
+      # Release the changeset version using pnpm
       - name: Release Changeset version
-        run: npx changeset version
+        run: pnpm changeset version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Commit and push the changes to the targeted branch
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+          TARGET_BRANCH=${{ GITHUB_BASE_REF/refs\/heads\// }}
           git add .
           git commit -m "Commit changes from Changeset versioning"
-          git push origin HEAD:develop
+          git push origin HEAD:$TARGET_BRANCH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
