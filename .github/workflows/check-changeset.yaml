@@ -97,6 +97,6 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add .
           git commit -m "Commit changes from Changeset versioning"
-          git push origin HEAD:feature/changeset-test
+          git push origin HEAD:${GITHUB_HEAD_REF}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
