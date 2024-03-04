@@ -1,5 +1,14 @@
 # @krish/hubspot
 
+## 13.0.0
+
+### Major Changes
+
+- f563743: changeset test
+- 50cf545: test
+- 1fa1600: te
+- c815438: tet
+
 ## 12.0.0
 
 ### Major Changes

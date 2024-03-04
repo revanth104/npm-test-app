@@ -1,5 +1,15 @@
 # @krish/hubspot
 
+## 60.0.0
+
+### Major Changes
+
+- f563743: changeset test
+- 50cf545: test
+- 6a7a361: test changeset action
+- 1fa1600: te
+- c815438: tet
+
 ## 7.0.0
 
 ### Major Changes
